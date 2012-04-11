@@ -5,6 +5,7 @@
          data source, the example data source is just for proofs of concept! -->
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>jdbc_MasxaroConnect</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- Properties for Hibernate -->
       <property name="hibernate.show_sql" value="false"/>
