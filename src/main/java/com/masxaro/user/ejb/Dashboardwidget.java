@@ -1,5 +1,5 @@
 /*
-*  Copyright 2012 World Three Technologies, Inc. 
+ *  Copyright 2012 World Three Technologies, Inc. 
  *  All Rights Reserved.
  * 
  *  This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dashboardwidget.findByDashboardwidgetid", query = "SELECT d FROM Dashboardwidget d WHERE d.dashboardwidgetid = :dashboardwidgetid"),
     @NamedQuery(name = "Dashboardwidget.findByDashboardwidgettitle", query = "SELECT d FROM Dashboardwidget d WHERE d.dashboardwidgettitle = :dashboardwidgettitle"),
     @NamedQuery(name = "Dashboardwidget.findByDashboardwidgetresourcename", query = "SELECT d FROM Dashboardwidget d WHERE d.dashboardwidgetresourcename = :dashboardwidgetresourcename")})
-public class DashboardWidget implements Serializable {
+public class Dashboardwidget implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -59,19 +59,18 @@ public class DashboardWidget implements Serializable {
     private String dashboardwidgetresourcename;
     @JoinTable(name = "userdashboardwidget", joinColumns = {
         @JoinColumn(name = "dashboardwidgetid", referencedColumnName = "dashboardwidgetid", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false),
-        @JoinColumn(name = "serverid", referencedColumnName = "serverid", nullable = false)})
+        @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false)})
     @ManyToMany
-    private Collection<MasxaroUser> masxarouserCollection;
+    private Collection<Masxarouser> masxarouserCollection;
 
-    public DashboardWidget() {
+    public Dashboardwidget() {
     }
 
-    public DashboardWidget(Integer dashboardwidgetid) {
+    public Dashboardwidget(Integer dashboardwidgetid) {
         this.dashboardwidgetid = dashboardwidgetid;
     }
 
-    public DashboardWidget(Integer dashboardwidgetid, String dashboardwidgettitle, String dashboardwidgetresourcename) {
+    public Dashboardwidget(Integer dashboardwidgetid, String dashboardwidgettitle, String dashboardwidgetresourcename) {
         this.dashboardwidgetid = dashboardwidgetid;
         this.dashboardwidgettitle = dashboardwidgettitle;
         this.dashboardwidgetresourcename = dashboardwidgetresourcename;
@@ -102,11 +101,11 @@ public class DashboardWidget implements Serializable {
     }
 
     @XmlTransient
-    public Collection<MasxaroUser> getMasxarouserCollection() {
+    public Collection<Masxarouser> getMasxarouserCollection() {
         return masxarouserCollection;
     }
 
-    public void setMasxarouserCollection(Collection<MasxaroUser> masxarouserCollection) {
+    public void setMasxarouserCollection(Collection<Masxarouser> masxarouserCollection) {
         this.masxarouserCollection = masxarouserCollection;
     }
 
@@ -120,10 +119,10 @@ public class DashboardWidget implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DashboardWidget)) {
+        if (!(object instanceof Dashboardwidget)) {
             return false;
         }
-        DashboardWidget other = (DashboardWidget) object;
+        Dashboardwidget other = (Dashboardwidget) object;
         if ((this.dashboardwidgetid == null && other.dashboardwidgetid != null) || (this.dashboardwidgetid != null && !this.dashboardwidgetid.equals(other.dashboardwidgetid))) {
             return false;
         }

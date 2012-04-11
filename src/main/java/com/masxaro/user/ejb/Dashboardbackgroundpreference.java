@@ -1,4 +1,5 @@
-/*
+
+ /*
  *  Copyright 2012 World Three Technologies, Inc. 
  *  All Rights Reserved.
  * 
@@ -18,6 +19,7 @@
  *
  *  Written by Brian Shimkaveg <bws@masxaro.com>
  */
+
 package com.masxaro.user.ejb;
 
 import java.io.Serializable;
@@ -40,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dashboardbackgroundpreference.findByDashboardbackgroundid", query = "SELECT d FROM Dashboardbackgroundpreference d WHERE d.dashboardbackgroundid = :dashboardbackgroundid"),
     @NamedQuery(name = "Dashboardbackgroundpreference.findByDashboardbackgroundtitle", query = "SELECT d FROM Dashboardbackgroundpreference d WHERE d.dashboardbackgroundtitle = :dashboardbackgroundtitle"),
     @NamedQuery(name = "Dashboardbackgroundpreference.findByDashboardbackgroundresourcename", query = "SELECT d FROM Dashboardbackgroundpreference d WHERE d.dashboardbackgroundresourcename = :dashboardbackgroundresourcename")})
-public class DashboardBackgroundPreference implements Serializable {
+public class Dashboardbackgroundpreference implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -58,16 +60,16 @@ public class DashboardBackgroundPreference implements Serializable {
     @Column(name = "dashboardbackgroundresourcename", nullable = false, length = 2147483647)
     private String dashboardbackgroundresourcename;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dashboardbackgroundid")
-    private Collection<MasxaroUser> masxarouserCollection;
+    private Collection<Masxarouser> masxarouserCollection;
 
-    public DashboardBackgroundPreference() {
+    public Dashboardbackgroundpreference() {
     }
 
-    public DashboardBackgroundPreference(Integer dashboardbackgroundid) {
+    public Dashboardbackgroundpreference(Integer dashboardbackgroundid) {
         this.dashboardbackgroundid = dashboardbackgroundid;
     }
 
-    public DashboardBackgroundPreference(Integer dashboardbackgroundid, String dashboardbackgroundtitle, String dashboardbackgroundresourcename) {
+    public Dashboardbackgroundpreference(Integer dashboardbackgroundid, String dashboardbackgroundtitle, String dashboardbackgroundresourcename) {
         this.dashboardbackgroundid = dashboardbackgroundid;
         this.dashboardbackgroundtitle = dashboardbackgroundtitle;
         this.dashboardbackgroundresourcename = dashboardbackgroundresourcename;
@@ -98,11 +100,11 @@ public class DashboardBackgroundPreference implements Serializable {
     }
 
     @XmlTransient
-    public Collection<MasxaroUser> getMasxarouserCollection() {
+    public Collection<Masxarouser> getMasxarouserCollection() {
         return masxarouserCollection;
     }
 
-    public void setMasxarouserCollection(Collection<MasxaroUser> masxarouserCollection) {
+    public void setMasxarouserCollection(Collection<Masxarouser> masxarouserCollection) {
         this.masxarouserCollection = masxarouserCollection;
     }
 
@@ -116,10 +118,10 @@ public class DashboardBackgroundPreference implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DashboardBackgroundPreference)) {
+        if (!(object instanceof Dashboardbackgroundpreference)) {
             return false;
         }
-        DashboardBackgroundPreference other = (DashboardBackgroundPreference) object;
+        Dashboardbackgroundpreference other = (Dashboardbackgroundpreference) object;
         if ((this.dashboardbackgroundid == null && other.dashboardbackgroundid != null) || (this.dashboardbackgroundid != null && !this.dashboardbackgroundid.equals(other.dashboardbackgroundid))) {
             return false;
         }
