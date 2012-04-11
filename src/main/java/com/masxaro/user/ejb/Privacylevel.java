@@ -1,5 +1,5 @@
 /*
-*  Copyright 2012 World Three Technologies, Inc. 
+ *  Copyright 2012 World Three Technologies, Inc. 
  *  All Rights Reserved.
  * 
  *  This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Privacylevel.findByPrivacyoptionid", query = "SELECT p FROM Privacylevel p WHERE p.privacyoptionid = :privacyoptionid"),
     @NamedQuery(name = "Privacylevel.findByPrivacylevelname", query = "SELECT p FROM Privacylevel p WHERE p.privacylevelname = :privacylevelname"),
     @NamedQuery(name = "Privacylevel.findByPrivacyleveldescription", query = "SELECT p FROM Privacylevel p WHERE p.privacyleveldescription = :privacyleveldescription")})
-public class PrivacyLevel implements Serializable {
+public class Privacylevel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -58,16 +58,16 @@ public class PrivacyLevel implements Serializable {
     @Column(name = "privacyleveldescription", nullable = false, length = 2147483647)
     private String privacyleveldescription;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "privacyoptionid")
-    private Collection<MasxaroUser> masxarouserCollection;
+    private Collection<Masxarouser> masxarouserCollection;
 
-    public PrivacyLevel() {
+    public Privacylevel() {
     }
 
-    public PrivacyLevel(Integer privacyoptionid) {
+    public Privacylevel(Integer privacyoptionid) {
         this.privacyoptionid = privacyoptionid;
     }
 
-    public PrivacyLevel(Integer privacyoptionid, String privacylevelname, String privacyleveldescription) {
+    public Privacylevel(Integer privacyoptionid, String privacylevelname, String privacyleveldescription) {
         this.privacyoptionid = privacyoptionid;
         this.privacylevelname = privacylevelname;
         this.privacyleveldescription = privacyleveldescription;
@@ -98,11 +98,11 @@ public class PrivacyLevel implements Serializable {
     }
 
     @XmlTransient
-    public Collection<MasxaroUser> getMasxarouserCollection() {
+    public Collection<Masxarouser> getMasxarouserCollection() {
         return masxarouserCollection;
     }
 
-    public void setMasxarouserCollection(Collection<MasxaroUser> masxarouserCollection) {
+    public void setMasxarouserCollection(Collection<Masxarouser> masxarouserCollection) {
         this.masxarouserCollection = masxarouserCollection;
     }
 
@@ -116,10 +116,10 @@ public class PrivacyLevel implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PrivacyLevel)) {
+        if (!(object instanceof Privacylevel)) {
             return false;
         }
-        PrivacyLevel other = (PrivacyLevel) object;
+        Privacylevel other = (Privacylevel) object;
         if ((this.privacyoptionid == null && other.privacyoptionid != null) || (this.privacyoptionid != null && !this.privacyoptionid.equals(other.privacyoptionid))) {
             return false;
         }

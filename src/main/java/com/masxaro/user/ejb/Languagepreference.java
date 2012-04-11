@@ -1,5 +1,5 @@
 /*
-*  Copyright 2012 World Three Technologies, Inc. 
+ *  Copyright 2012 World Three Technologies, Inc. 
  *  All Rights Reserved.
  * 
  *  This program is free software; you can redistribute it and/or modify
@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Languagepreference.findAll", query = "SELECT l FROM Languagepreference l"),
     @NamedQuery(name = "Languagepreference.findByLanguagepreferenceid", query = "SELECT l FROM Languagepreference l WHERE l.languagepreferenceid = :languagepreferenceid"),
     @NamedQuery(name = "Languagepreference.findByValue", query = "SELECT l FROM Languagepreference l WHERE l.value = :value")})
-public class LanguagePreference implements Serializable {
+public class Languagepreference implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -52,16 +52,16 @@ public class LanguagePreference implements Serializable {
     @Column(name = "value", nullable = false, length = 2147483647)
     private String value;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languagepreferenceid")
-    private Collection<MasxaroUser> masxarouserCollection;
+    private Collection<Masxarouser> masxarouserCollection;
 
-    public LanguagePreference() {
+    public Languagepreference() {
     }
 
-    public LanguagePreference(Integer languagepreferenceid) {
+    public Languagepreference(Integer languagepreferenceid) {
         this.languagepreferenceid = languagepreferenceid;
     }
 
-    public LanguagePreference(Integer languagepreferenceid, String value) {
+    public Languagepreference(Integer languagepreferenceid, String value) {
         this.languagepreferenceid = languagepreferenceid;
         this.value = value;
     }
@@ -83,11 +83,11 @@ public class LanguagePreference implements Serializable {
     }
 
     @XmlTransient
-    public Collection<MasxaroUser> getMasxarouserCollection() {
+    public Collection<Masxarouser> getMasxarouserCollection() {
         return masxarouserCollection;
     }
 
-    public void setMasxarouserCollection(Collection<MasxaroUser> masxarouserCollection) {
+    public void setMasxarouserCollection(Collection<Masxarouser> masxarouserCollection) {
         this.masxarouserCollection = masxarouserCollection;
     }
 
@@ -101,10 +101,10 @@ public class LanguagePreference implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LanguagePreference)) {
+        if (!(object instanceof Languagepreference)) {
             return false;
         }
-        LanguagePreference other = (LanguagePreference) object;
+        Languagepreference other = (Languagepreference) object;
         if ((this.languagepreferenceid == null && other.languagepreferenceid != null) || (this.languagepreferenceid != null && !this.languagepreferenceid.equals(other.languagepreferenceid))) {
             return false;
         }

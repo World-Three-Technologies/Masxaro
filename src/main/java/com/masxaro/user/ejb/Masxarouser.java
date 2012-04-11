@@ -1,5 +1,5 @@
 /*
-*  Copyright 2012 World Three Technologies, Inc. 
+ *  Copyright 2012 World Three Technologies, Inc. 
  *  All Rights Reserved.
  * 
  *  This program is free software; you can redistribute it and/or modify
@@ -38,8 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Masxarouser.findAll", query = "SELECT m FROM Masxarouser m"),
-    @NamedQuery(name = "Masxarouser.findByUserid", query = "SELECT m FROM Masxarouser m WHERE m.masxarouserPK.userid = :userid"),
-    @NamedQuery(name = "Masxarouser.findByServerid", query = "SELECT m FROM Masxarouser m WHERE m.masxarouserPK.serverid = :serverid"),
+    @NamedQuery(name = "Masxarouser.findByUserid", query = "SELECT m FROM Masxarouser m WHERE m.userid = :userid"),
     @NamedQuery(name = "Masxarouser.findByFirstname", query = "SELECT m FROM Masxarouser m WHERE m.firstname = :firstname"),
     @NamedQuery(name = "Masxarouser.findByLoginname", query = "SELECT m FROM Masxarouser m WHERE m.loginname = :loginname"),
     @NamedQuery(name = "Masxarouser.findByRecoveryemailaddress", query = "SELECT m FROM Masxarouser m WHERE m.recoveryemailaddress = :recoveryemailaddress"),
@@ -50,11 +49,15 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Masxarouser.findByPostalcode", query = "SELECT m FROM Masxarouser m WHERE m.postalcode = :postalcode"),
     @NamedQuery(name = "Masxarouser.findByDateofbirth", query = "SELECT m FROM Masxarouser m WHERE m.dateofbirth = :dateofbirth"),
     @NamedQuery(name = "Masxarouser.findByGender", query = "SELECT m FROM Masxarouser m WHERE m.gender = :gender"),
-    @NamedQuery(name = "Masxarouser.findByUseralias", query = "SELECT m FROM Masxarouser m WHERE m.useralias = :useralias")})
-public class MasxaroUser implements Serializable {
+    @NamedQuery(name = "Masxarouser.findByUseralias", query = "SELECT m FROM Masxarouser m WHERE m.useralias = :useralias"),
+    @NamedQuery(name = "Masxarouser.findByCodecontributor", query = "SELECT m FROM Masxarouser m WHERE m.codecontributor = :codecontributor")})
+public class Masxarouser implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected MasxaroUserPK masxaroUserPK;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "userid", nullable = false)
+    private Long userid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -107,27 +110,31 @@ public class MasxaroUser implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "useralias", nullable = false, length = 2147483647)
     private String useralias;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "codecontributor", nullable = false)
+    private boolean codecontributor;
     @ManyToMany(mappedBy = "masxarouserCollection")
-    private Collection<DashboardWidget> dashboardwidgetCollection;
+    private Collection<Dashboardwidget> dashboardwidgetCollection;
     @JoinColumn(name = "privacyoptionid", referencedColumnName = "privacyoptionid", nullable = false)
     @ManyToOne(optional = false)
-    private PrivacyLevel privacyoptionid;
+    private Privacylevel privacyoptionid;
     @JoinColumn(name = "languagepreferenceid", referencedColumnName = "languagepreferenceid", nullable = false)
     @ManyToOne(optional = false)
-    private LanguagePreference languagepreferenceid;
+    private Languagepreference languagepreferenceid;
     @JoinColumn(name = "dashboardbackgroundid", referencedColumnName = "dashboardbackgroundid", nullable = false)
     @ManyToOne(optional = false)
-    private DashboardBackgroundPreference dashboardbackgroundid;
+    private Dashboardbackgroundpreference dashboardbackgroundid;
 
-    public MasxaroUser() {
+    public Masxarouser() {
     }
 
-    public MasxaroUser(MasxaroUserPK masxaroUserPK) {
-        this.masxaroUserPK = masxaroUserPK;
+    public Masxarouser(Long userid) {
+        this.userid = userid;
     }
 
-    public MasxaroUser(MasxaroUserPK masxaroUserPK, String firstname, String loginname, String recoveryemailaddress, Date accountcreationdate, boolean verification, boolean deleted, Date profilemodifieddate, int postalcode, Date dateofbirth, String gender, String useralias) {
-        this.masxaroUserPK = masxaroUserPK;
+    public Masxarouser(Long userid, String firstname, String loginname, String recoveryemailaddress, Date accountcreationdate, boolean verification, boolean deleted, Date profilemodifieddate, int postalcode, Date dateofbirth, String gender, String useralias, boolean codecontributor) {
+        this.userid = userid;
         this.firstname = firstname;
         this.loginname = loginname;
         this.recoveryemailaddress = recoveryemailaddress;
@@ -139,18 +146,15 @@ public class MasxaroUser implements Serializable {
         this.dateofbirth = dateofbirth;
         this.gender = gender;
         this.useralias = useralias;
+        this.codecontributor = codecontributor;
     }
 
-    public MasxaroUser(long userid, long serverid) {
-        this.masxaroUserPK = new MasxaroUserPK(userid, serverid);
+    public Long getUserid() {
+        return userid;
     }
 
-    public MasxaroUserPK getMasxarouserPK() {
-        return masxaroUserPK;
-    }
-
-    public void setMasxarouserPK(MasxaroUserPK masxaroUserPK) {
-        this.masxaroUserPK = masxaroUserPK;
+    public void setUserid(Long userid) {
+        this.userid = userid;
     }
 
     public String getFirstname() {
@@ -241,54 +245,62 @@ public class MasxaroUser implements Serializable {
         this.useralias = useralias;
     }
 
+    public boolean getCodecontributor() {
+        return codecontributor;
+    }
+
+    public void setCodecontributor(boolean codecontributor) {
+        this.codecontributor = codecontributor;
+    }
+
     @XmlTransient
-    public Collection<DashboardWidget> getDashboardwidgetCollection() {
+    public Collection<Dashboardwidget> getDashboardwidgetCollection() {
         return dashboardwidgetCollection;
     }
 
-    public void setDashboardwidgetCollection(Collection<DashboardWidget> dashboardwidgetCollection) {
+    public void setDashboardwidgetCollection(Collection<Dashboardwidget> dashboardwidgetCollection) {
         this.dashboardwidgetCollection = dashboardwidgetCollection;
     }
 
-    public PrivacyLevel getPrivacyoptionid() {
+    public Privacylevel getPrivacyoptionid() {
         return privacyoptionid;
     }
 
-    public void setPrivacyoptionid(PrivacyLevel privacyoptionid) {
+    public void setPrivacyoptionid(Privacylevel privacyoptionid) {
         this.privacyoptionid = privacyoptionid;
     }
 
-    public LanguagePreference getLanguagepreferenceid() {
+    public Languagepreference getLanguagepreferenceid() {
         return languagepreferenceid;
     }
 
-    public void setLanguagepreferenceid(LanguagePreference languagepreferenceid) {
+    public void setLanguagepreferenceid(Languagepreference languagepreferenceid) {
         this.languagepreferenceid = languagepreferenceid;
     }
 
-    public DashboardBackgroundPreference getDashboardbackgroundid() {
+    public Dashboardbackgroundpreference getDashboardbackgroundid() {
         return dashboardbackgroundid;
     }
 
-    public void setDashboardbackgroundid(DashboardBackgroundPreference dashboardbackgroundid) {
+    public void setDashboardbackgroundid(Dashboardbackgroundpreference dashboardbackgroundid) {
         this.dashboardbackgroundid = dashboardbackgroundid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (masxaroUserPK != null ? masxaroUserPK.hashCode() : 0);
+        hash += (userid != null ? userid.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MasxaroUser)) {
+        if (!(object instanceof Masxarouser)) {
             return false;
         }
-        MasxaroUser other = (MasxaroUser) object;
-        if ((this.masxaroUserPK == null && other.masxaroUserPK != null) || (this.masxaroUserPK != null && !this.masxaroUserPK.equals(other.masxaroUserPK))) {
+        Masxarouser other = (Masxarouser) object;
+        if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
             return false;
         }
         return true;
@@ -296,7 +308,7 @@ public class MasxaroUser implements Serializable {
 
     @Override
     public String toString() {
-        return "com.masxaro.user.ejb.Masxarouser[ masxarouserPK=" + masxaroUserPK + " ]";
+        return "com.masxaro.user.ejb.Masxarouser[ userid=" + userid + " ]";
     }
     
 }
