@@ -2,12 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>com.test</groupId>
-   <artifactId>MasxaroTest</artifactId>
+   <groupId>com.masxaro</groupId>
+   <artifactId>Masxaro</artifactId>
    <version>1.0</version>
    <packaging>war</packaging>
-   <name>Java EE 6 webapp project</name>
-   <description>A starter Java EE 6 webapp project for use on JBoss AS 7 / EAP 6, generated from the jboss-javaee6-webapp archetype</description>
+   <name>Masxaro</name>
+   <description>A Java EE 6 webapp project for use on JBoss AS 7 / EAP 6, generated from the jboss-javaee6-webapp archetype. 
+</description>
+
+<distributionManagement>
+<site>
+<id>www.masxaro.net</id>
+<url>scp://www.masxaro.net/var/www/html/</url>
+</site>
+</distributionManagement>
+
+
+
+<scm>
+    <connection>scm:git://github.com/World-Three-Technologies/Masxaro.git</connection>
+    <developerConnection>scm:git@github.com:World-Three-Technologies/Masxaro.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/World-Three-Technologies/Masxaro</url>
+  </scm>
+
+
+
+
 
    <properties>
       <!-- Explicitly declaring the source encoding eliminates the following 
@@ -144,6 +165,73 @@
    </dependencies>
 
    <build>
+
+
+
+<pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.1</version>
+          <dependencies>
+            <dependency><!-- add support for ssh/scp -->
+              <groupId>org.apache.maven.wagon</groupId>
+              <artifactId>wagon-ssh</artifactId>
+              <version>1.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+<version>2.6</version>
+</plugin>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-checkstyle-plugin</artifactId>
+<version>2.6</version>
+<configuration>
+<enableRulesSummary>false</enableRulesSummary>
+</configuration>
+</plugin>
+
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>dashboard-maven-plugin</artifactId>
+<version>1.0.0-beta-1</version>
+</plugin>
+
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-javadoc-plugin</artifactId>
+<version>2.7</version>
+<configuration>
+</configuration>
+</plugin>
+
+
+
+      </plugins>
+    </pluginManagement>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- Maven will append the version to the finalName (which is the name 
          given to the generated war, and hence the context root) -->
       <finalName>${project.artifactId}</finalName>
@@ -175,6 +263,22 @@
             <artifactId>jboss-as-maven-plugin</artifactId>
             <version>7.1.0.Beta1b</version>
          </plugin>
+
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+</plugin>
+
+
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>dashboard-maven-plugin</artifactId>
+<version>1.0.0-beta-1</version>
+</plugin>
+
+
+
       </plugins>
    </build>
 
@@ -192,9 +296,9 @@
             <plugins>
                <plugin>
                   <artifactId>maven-surefire-plugin</artifactId>
-                  <version>2.4.3</version>
+                  <version>2.6</version>
                   <configuration>
-                     <skip>true</skip>
+                    
                   </configuration>
                </plugin>
             </plugins>
@@ -320,4 +424,197 @@
       </profile>
 
    </profiles>
+
+
+<licenses>
+ <license>
+   <name>Masxaro</name>
+<url>http://www.masxaro.net/licenses/license.html</url>
+<distribution>...</distribution>
+</license>
+</licenses>
+
+<developers>
+
+<developer>
+<name>Brian S.</name>
+<email>bws@masxaro.com</email>
+<organization>Self</organization>
+<roles>
+<role>Project Founder</role>
+<role>Java Developer</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+
+
+
+<developer>
+<name>Greg P.</name>
+<email>gjp@masxaro.com</email>
+<organization>Self</organization>
+<roles>
+<role>Architect</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+<developer>
+<name>Yichao Y.</name>
+<email>yichao@masxaro.com</email>
+<organization>Self</organization>
+<roles>
+<role>GUI Development</role>
+<role>Mobile App Development</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+<developer>
+<name>Bugra A.</name>
+<email>bakyil01@students.poly.edu</email>
+<organization>Self</organization>
+<roles>
+<role>Database Development</role>
+</roles>
+<timezone>+2</timezone>
+</developer>
+
+
+<developer>
+<name>Alex C.</name>
+<email>schan02@students.poly.edu</email>
+<organization>Self</organization>
+<roles>
+<role>Mobile App Development</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+<developer>
+<name>Navdeep D.</name>
+<email>ndhari01@students.poly.edu</email>
+<organization>Self</organization>
+<roles>
+<role>Business Logic Development</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+<developer>
+<name>Ye S.</name>
+<email>ys1155@nyu.edu</email>
+<organization>Self</organization>
+<roles>
+<role>Developer</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+<developer>
+<name>Samir S.</name>
+<email>samirsuliman93@gmail.com</email>
+<organization>Self</organization>
+<roles>
+<role>Developer</role>
+</roles>
+<timezone>-4</timezone>
+</developer>
+
+</developers>
+
+
+<contributors>
+<contributor>
+<name>Meena</name>
+<email>meena@masxaro.com</email>
+<organization>Self</organization>
+<roles>
+<role>Market Research</role>
+</roles>
+<timezone>-4</timezone>
+</contributor>
+<contributor>
+<name>Kate</name>
+<email>kate@masxaro.com</email>
+<organization>Self</organization>
+<roles>
+<role>Market Research</role>
+</roles>
+<timezone>-4</timezone>
+</contributor>
+</contributors>
+
+<issueManagement>
+<system>Redmine</system>
+<url>http://support.masxaro.net/redmine/</url>
+</issueManagement>
+
+
+<ciManagement>
+<system>hudson</system>
+<url>http://www.masxaro.net:8080/hudson/</url>
+<notifiers>
+<notifier>
+<sendOnError>true</sendOnError>
+<sendOnFailure>true </sendOnFailure>
+<sendOnSuccess>true </sendOnSuccess>
+<sendOnWarning>true </sendOnWarning>
+</notifier>
+</notifiers>
+</ciManagement>
+
+
+
+
+
+
+<mailingLists>
+<mailingList>
+<name>Masxaro Developer List</name>
+<subscribe>subscribe@masxaro.net</subscribe>
+<unsubscribe>masxaro-developers+unsubscribe@googlegroups.com</unsubscribe>
+<post>masxaro-developers@googlegroups.com</post>
+<archive>http://masxaro.net/user/</archive>
+</mailingList>
+</mailingLists>
+
+<reporting>
+<plugins>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-javadoc-plugin</artifactId>
+<version>2.7</version>
+<configuration>
+</configuration>
+</plugin>
+
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>cobertura-maven-plugin</artifactId>
+<version>2.4</version>
+</plugin>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-checkstyle-plugin</artifactId>
+<version>2.6</version>
+</plugin>
+
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>dashboard-maven-plugin</artifactId>
+<version>1.0.0-beta-1</version>
+</plugin>
+
+</plugins>
+</reporting>
+
+   <inceptionYear>2010</inceptionYear>
+   <organization>
+   	<name>World Three Technologies</name>
+   </organization>
+   <url>www.masxaro.net</url>
 </project>
