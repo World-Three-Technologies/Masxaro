@@ -4,7 +4,7 @@
  * 
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  This program is distributed in the hope that it will be useful,
@@ -15,10 +15,17 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *  
+ *  
+ *  
+ *  
+ *  
+ *  
+ *  
  *
  *  Written by Brian Shimkaveg <bws@masxaro.com>
  */
-package com.masxaro.user.ejb;
+package com.masxaro.data.user.ejb;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -39,7 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Languagepreference.findAll", query = "SELECT l FROM Languagepreference l"),
     @NamedQuery(name = "Languagepreference.findByLanguagepreferenceid", query = "SELECT l FROM Languagepreference l WHERE l.languagepreferenceid = :languagepreferenceid"),
     @NamedQuery(name = "Languagepreference.findByValue", query = "SELECT l FROM Languagepreference l WHERE l.value = :value")})
-public class Languagepreference implements Serializable {
+public class LanguagePreference implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -52,16 +59,16 @@ public class Languagepreference implements Serializable {
     @Column(name = "value", nullable = false, length = 2147483647)
     private String value;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languagepreferenceid")
-    private Collection<Masxarouser> masxarouserCollection;
+    private Collection<MasxaroUser> masxarouserCollection;
 
-    public Languagepreference() {
+    public LanguagePreference() {
     }
 
-    public Languagepreference(Integer languagepreferenceid) {
+    public LanguagePreference(Integer languagepreferenceid) {
         this.languagepreferenceid = languagepreferenceid;
     }
 
-    public Languagepreference(Integer languagepreferenceid, String value) {
+    public LanguagePreference(Integer languagepreferenceid, String value) {
         this.languagepreferenceid = languagepreferenceid;
         this.value = value;
     }
@@ -83,11 +90,11 @@ public class Languagepreference implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Masxarouser> getMasxarouserCollection() {
+    public Collection<MasxaroUser> getMasxarouserCollection() {
         return masxarouserCollection;
     }
 
-    public void setMasxarouserCollection(Collection<Masxarouser> masxarouserCollection) {
+    public void setMasxarouserCollection(Collection<MasxaroUser> masxarouserCollection) {
         this.masxarouserCollection = masxarouserCollection;
     }
 
@@ -101,10 +108,10 @@ public class Languagepreference implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Languagepreference)) {
+        if (!(object instanceof LanguagePreference)) {
             return false;
         }
-        Languagepreference other = (Languagepreference) object;
+        LanguagePreference other = (LanguagePreference) object;
         if ((this.languagepreferenceid == null && other.languagepreferenceid != null) || (this.languagepreferenceid != null && !this.languagepreferenceid.equals(other.languagepreferenceid))) {
             return false;
         }
