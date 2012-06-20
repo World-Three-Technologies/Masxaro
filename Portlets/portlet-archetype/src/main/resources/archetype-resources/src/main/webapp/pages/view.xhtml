@@ -1,0 +1,36 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form id="reg">
+         <h2>Register</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="name" value="Name:"/>
+            <h:inputText id="name" value="${symbol_pound}{memberRegistration.newMember.name}" />
+            <h:message for="name" errorClass="invalid"/>
+
+            <h:outputLabel for="email" value="Email:"/>
+            <h:inputText id="email" value="${symbol_pound}{memberRegistration.newMember.email}"/>
+            <h:message for="email" errorClass="invalid"/>
+
+            <h:outputLabel for="phoneNumber" value="Phone ${symbol_pound}:"/>
+            <h:inputText id="phoneNumber" value="${symbol_pound}{memberRegistration.newMember.phoneNumber}"/>
+            <h:message for="phoneNumber" errorClass="invalid"/>
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="${symbol_pound}{memberRegistration.register}" value="Register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+      </h:form>
+   </ui:define>
+</ui:composition>
