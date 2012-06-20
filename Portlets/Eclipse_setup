@@ -1,0 +1,6 @@
+1. Download jboss plugin from Eclipse Marketplace
+
+2. Setup Jboss/GateIn server
+2.1 In "Servers" Tab of Java EE Perspective, "new" a server.
+2.2 select the server type: Jboss AS 7.1
+2.3 Configure runtime enviornment: choose server home directory (%JBOSS_HOME%) and configuration file (standalone.xml)

@@ -1,0 +1,12 @@
+Instructions for set up a GateIn portlet project from a Maven Archetype in Eclipse
+
+1 Install maven archetype in command line:
+1.1 "cd portlet-archetype"
+1.2 "mvn install"
+
+
+2 Generate a portlet project from the Maven Archetype
+2.1 go to the workspace directory
+2.2 "mvn archetype-generate -DarchetypeCatalog=local" and choose the archetype "DemoPortlet-archetype"
+2.3 enter the groupId, artifactId and package name (default)
+2.4 open Eclipse and import the Existing Maven project
