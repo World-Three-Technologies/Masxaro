@@ -1,0 +1,15 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="Portlet" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/MasxaroDS</jta-data-source>
+		<class>${package}.model.Member</class>
+      	<properties>
+         	<!-- Properties for Hibernate -->
+         	<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+         	<property name="hibernate.show_sql" value="false" />
+      	</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,75 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Portlet</display-name>
+  <welcome-file-list>
+    <welcome-file>/pages/view.xhtml</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+    <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+    <param-value>org.jboss.portletbridge.application.FaceletPortletViewHandler</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+    <param-name>javax.faces.FACELETS_VIEW_MAPPINGS</param-name>
+    <param-value>*.xhtml</param-value>
+  </context-param>
+  
+  <context-param>
+      <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+      <param-value>.xhtml</param-value>
+   </context-param>
+   
+   <context-param> 
+      <param-name>javax.faces.PROJECT_STAGE</param-name> 
+      <param-value>Development</param-value> 
+   </context-param>
+   
+   <context-param>
+      <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+      <param-value>server</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>javax.portlet.faces.RENDER_POLICY</param-name>
+      <param-value>ALWAYS_DELEGATE</param-value>
+   </context-param>
+   
+   <context-param>
+      <param-name>javax.portlet.faces.renderPolicy</param-name>
+      <param-value>NEVER_DELEGATE</param-value>
+   </context-param>
+   
+   <context-param>
+    <param-name>javax.faces.LIFECYCLE_ID</param-name>
+    <param-value>DEFAULT</param-value>
+  </context-param>
+   
+   <filter>
+       <filter-name>WeldCrossContextFilter</filter-name>
+       <filter-class>org.jboss.weld.servlet.WeldCrossContextFilter</filter-class>
+   </filter>
+
+   <filter-mapping>
+       <filter-name>WeldCrossContextFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+       <dispatcher>INCLUDE</dispatcher>
+       <dispatcher>FORWARD</dispatcher>
+       <dispatcher>ERROR</dispatcher>
+   </filter-mapping>
+
+</web-app>
